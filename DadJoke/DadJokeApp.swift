@@ -8,5 +8,6 @@ struct DadJokeApp: App {
         }
         .windowResizability(.contentSize)
         .defaultSize(width: 300, height: 300)
+        .windowStyle(.hiddenTitleBar)
     }
 }

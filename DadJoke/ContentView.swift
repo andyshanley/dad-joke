@@ -22,6 +22,10 @@ struct ContentView: View {
         }
         .padding(24)
         .frame(width: 300, height: 300)
+        .background(WindowConfigurator())
+        .containerBackground(for: .window) {
+            Rectangle().glassEffect(.regular, in: Rectangle())
+        }
     }
 
     private func tellRandomJoke() {
