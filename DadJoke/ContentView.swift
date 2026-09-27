@@ -23,10 +23,9 @@ struct ContentView: View {
         }
         .padding(24)
         .frame(width: 300, height: 300)
-        .overlay(alignment: .topTrailing) {
+        .overlay(alignment: .top) {
             PlaybackModeToggle(mode: $playbackMode)
                 .padding(.top, 12)
-                .padding(.trailing, 12)
         }
         .background(WindowConfigurator())
         .containerBackground(for: .window) {
