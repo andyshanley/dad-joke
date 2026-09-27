@@ -37,5 +37,6 @@ struct PlaybackModeToggle: View {
                 }
         }
         .buttonStyle(.plain)
+        .focusEffectDisabled()
     }
 }
