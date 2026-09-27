@@ -16,6 +16,7 @@
 		1000000000000000000000C6 /* speak.py in Resources */ = {isa = PBXBuildFile; fileRef = 1000000000000000000000B6 /* speak.py */; };
 		1000000000000000000000C7 /* PiperSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1000000000000000000000B8 /* PiperSpeaker.swift */; };
 		1000000000000000000000C8 /* WindowConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1000000000000000000000B9 /* WindowConfigurator.swift */; };
+		1000000000000000000000C9 /* PlaybackModeToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1000000000000000000000BA /* PlaybackModeToggle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		1000000000000000000000B6 /* speak.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = speak.py; sourceTree = "<group>"; };
 		1000000000000000000000B8 /* PiperSpeaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiperSpeaker.swift; sourceTree = "<group>"; };
 		1000000000000000000000B9 /* WindowConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowConfigurator.swift; sourceTree = "<group>"; };
+		1000000000000000000000BA /* PlaybackModeToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackModeToggle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				1000000000000000000000B2 /* Jokes.swift */,
 				1000000000000000000000B8 /* PiperSpeaker.swift */,
 				1000000000000000000000B9 /* WindowConfigurator.swift */,
+				1000000000000000000000BA /* PlaybackModeToggle.swift */,
 				1000000000000000000000B3 /* Assets.xcassets */,
 				1000000000000000000000B7 /* Resources */,
 			);
@@ -177,6 +180,7 @@
 				1000000000000000000000C2 /* Jokes.swift in Sources */,
 				1000000000000000000000C7 /* PiperSpeaker.swift in Sources */,
 				1000000000000000000000C8 /* WindowConfigurator.swift in Sources */,
+				1000000000000000000000C9 /* PlaybackModeToggle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

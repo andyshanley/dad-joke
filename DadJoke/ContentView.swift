@@ -5,6 +5,7 @@ struct ContentView: View {
     @State private var currentJoke = "Press the button for a dad joke!"
     @State private var isSpeaking = false
     @State private var audioPlayer: AVAudioPlayer?
+    @State private var playbackMode: PlaybackMode = .textAndAudio
 
     var body: some View {
         VStack(spacing: 20) {
@@ -22,6 +23,11 @@ struct ContentView: View {
         }
         .padding(24)
         .frame(width: 300, height: 300)
+        .overlay(alignment: .topTrailing) {
+            PlaybackModeToggle(mode: $playbackMode)
+                .padding(.top, 12)
+                .padding(.trailing, 12)
+        }
         .background(WindowConfigurator())
         .containerBackground(for: .window) {
             Rectangle().glassEffect(.regular, in: Rectangle())
@@ -31,6 +37,8 @@ struct ContentView: View {
     private func tellRandomJoke() {
         guard let joke = dadJokes.randomElement() else { return }
         currentJoke = joke
+
+        guard playbackMode == .textAndAudio else { return }
         isSpeaking = true
 
         Task {
