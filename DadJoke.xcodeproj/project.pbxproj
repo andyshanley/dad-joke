@@ -11,6 +11,10 @@
 		1000000000000000000000C1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1000000000000000000000B1 /* ContentView.swift */; };
 		1000000000000000000000C2 /* Jokes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1000000000000000000000B2 /* Jokes.swift */; };
 		1000000000000000000000C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1000000000000000000000B3 /* Assets.xcassets */; };
+		1000000000000000000000C4 /* PythonRuntime in Resources */ = {isa = PBXBuildFile; fileRef = 1000000000000000000000B4 /* PythonRuntime */; };
+		1000000000000000000000C5 /* PiperVoice in Resources */ = {isa = PBXBuildFile; fileRef = 1000000000000000000000B5 /* PiperVoice */; };
+		1000000000000000000000C6 /* speak.py in Resources */ = {isa = PBXBuildFile; fileRef = 1000000000000000000000B6 /* speak.py */; };
+		1000000000000000000000C7 /* PiperSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1000000000000000000000B8 /* PiperSpeaker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +23,10 @@
 		1000000000000000000000B1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1000000000000000000000B2 /* Jokes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jokes.swift; sourceTree = "<group>"; };
 		1000000000000000000000B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1000000000000000000000B4 /* PythonRuntime */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PythonRuntime; sourceTree = "<group>"; };
+		1000000000000000000000B5 /* PiperVoice */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PiperVoice; sourceTree = "<group>"; };
+		1000000000000000000000B6 /* speak.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = speak.py; sourceTree = "<group>"; };
+		1000000000000000000000B8 /* PiperSpeaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiperSpeaker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,9 +62,21 @@
 				1000000000000000000000B0 /* DadJokeApp.swift */,
 				1000000000000000000000B1 /* ContentView.swift */,
 				1000000000000000000000B2 /* Jokes.swift */,
+				1000000000000000000000B8 /* PiperSpeaker.swift */,
 				1000000000000000000000B3 /* Assets.xcassets */,
+				1000000000000000000000B7 /* Resources */,
 			);
 			path = DadJoke;
+			sourceTree = "<group>";
+		};
+		1000000000000000000000B7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1000000000000000000000B4 /* PythonRuntime */,
+				1000000000000000000000B5 /* PiperVoice */,
+				1000000000000000000000B6 /* speak.py */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -69,6 +89,7 @@
 				1000000000000000000000A6 /* Sources */,
 				1000000000000000000000A7 /* Frameworks */,
 				1000000000000000000000A8 /* Resources */,
+				1000000000000000000000D0 /* Codesign Embedded Python Runtime */,
 			);
 			buildRules = (
 			);
@@ -118,10 +139,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				1000000000000000000000C3 /* Assets.xcassets in Resources */,
+				1000000000000000000000C4 /* PythonRuntime in Resources */,
+				1000000000000000000000C5 /* PiperVoice in Resources */,
+				1000000000000000000000C6 /* speak.py in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1000000000000000000000D0 /* Codesign Embedded Python Runtime */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Codesign Embedded Python Runtime";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "RUNTIME_DIR=\"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PythonRuntime\"\nif [ -d \"$RUNTIME_DIR\" ]; then\n  find \"$RUNTIME_DIR\" -type f \\( -perm -u+x -o -name \"*.dylib\" -o -name \"*.so\" -o -name \"*.ort\" \\) -print0 | while IFS= read -r -d '' f; do\n    if file \"$f\" | grep -q \"Mach-O\"; then\n      codesign --force --sign - --timestamp=none \"$f\"\n    fi\n  done\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1000000000000000000000A6 /* Sources */ = {
@@ -131,6 +172,7 @@
 				1000000000000000000000C0 /* DadJokeApp.swift in Sources */,
 				1000000000000000000000C1 /* ContentView.swift in Sources */,
 				1000000000000000000000C2 /* Jokes.swift in Sources */,
+				1000000000000000000000C7 /* PiperSpeaker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,7 +215,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -234,7 +276,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
