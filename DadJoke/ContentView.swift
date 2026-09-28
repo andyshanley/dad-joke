@@ -2,24 +2,33 @@ import SwiftUI
 import AVFoundation
 
 struct ContentView: View {
-    @State private var currentJoke = "Press the button for a dad joke!"
+    @State private var currentJoke = ""
+    @State private var lastJoke: String?
+    @State private var hasDrawnBefore = false
     @State private var isSpeaking = false
     @State private var audioPlayer: AVAudioPlayer?
     @State private var playbackMode: PlaybackMode = .textAndAudio
 
     var body: some View {
-        VStack(spacing: 20) {
-            Text(currentJoke)
-                .font(.body)
-                .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
+        VStack(spacing: 22) {
+            JokeDeckView(
+                displayText: currentJoke,
+                isPlaceholder: !hasDrawnBefore,
+                isDisabled: isSpeaking,
+                onTap: tellRandomJoke
+            )
 
-            Button("Random Dad Joke") {
-                tellRandomJoke()
+            ZStack {
+                if isSpeaking {
+                    DotMatrixWaveform()
+                        .frame(width: 210, height: 30)
+                } else if hasDrawnBefore {
+                    Text("Tap for another")
+                        .font(.system(size: 12))
+                        .foregroundStyle(.tertiary)
+                }
             }
-            .buttonStyle(.glass)
-            .controlSize(.large)
-            .disabled(isSpeaking)
+            .frame(height: 30)
         }
         .padding(24)
         .frame(width: 300, height: 300)
@@ -34,7 +43,9 @@ struct ContentView: View {
     }
 
     private func tellRandomJoke() {
-        guard let joke = dadJokes.randomElement() else { return }
+        guard let joke = randomJoke() else { return }
+        lastJoke = joke
+        hasDrawnBefore = true
         currentJoke = joke
 
         guard playbackMode == .textAndAudio else { return }
@@ -53,6 +64,15 @@ struct ContentView: View {
                 print("Failed to play synthesized audio: \(error)")
             }
         }
+    }
+
+    private func randomJoke() -> String? {
+        guard dadJokes.count > 1 else { return dadJokes.first }
+        var joke: String
+        repeat {
+            joke = dadJokes.randomElement()!
+        } while joke == lastJoke
+        return joke
     }
 }
 
