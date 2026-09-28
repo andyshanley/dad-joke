@@ -5,21 +5,26 @@ struct ContentView: View {
     @State private var currentJoke = ""
     @State private var lastJoke: String?
     @State private var hasDrawnBefore = false
-    @State private var isSpeaking = false
-    @State private var audioPlayer: AVAudioPlayer?
+    @State private var isSynthesizing = false
+    @StateObject private var audioController = AudioPlaybackController()
     @State private var playbackMode: PlaybackMode = .textAndAudio
+
+    /// True from the moment synthesis starts until the audio finishes
+    /// playing -- the waveform (and the disabled-tap guard) should span
+    /// that whole window, not just the synthesis half of it.
+    private var isBusy: Bool { isSynthesizing || audioController.isPlaying }
 
     var body: some View {
         VStack(spacing: 22) {
             JokeDeckView(
                 displayText: currentJoke,
                 isPlaceholder: !hasDrawnBefore,
-                isDisabled: isSpeaking,
+                isDisabled: isBusy,
                 onTap: tellRandomJoke
             )
 
             ZStack {
-                if isSpeaking {
+                if isBusy {
                     DotMatrixWaveform()
                         .frame(width: 210, height: 30)
                 } else if hasDrawnBefore {
@@ -38,7 +43,9 @@ struct ContentView: View {
         }
         .background(WindowConfigurator())
         .containerBackground(for: .window) {
-            Rectangle().glassEffect(.regular, in: Rectangle())
+            Rectangle()
+                .fill(.clear)
+                .glassEffect(.regular.tint(.black.opacity(0.55)), in: Rectangle())
         }
     }
 
@@ -49,20 +56,14 @@ struct ContentView: View {
         currentJoke = joke
 
         guard playbackMode == .textAndAudio else { return }
-        isSpeaking = true
+        isSynthesizing = true
 
         Task {
             let wavURL = await PiperSpeaker.shared.synthesize(text: joke)
-            isSpeaking = false
+            isSynthesizing = false
 
             guard let wavURL else { return }
-            do {
-                let player = try AVAudioPlayer(contentsOf: wavURL)
-                audioPlayer = player
-                player.play()
-            } catch {
-                print("Failed to play synthesized audio: \(error)")
-            }
+            audioController.play(url: wavURL, rate: 1.1)
         }
     }
 

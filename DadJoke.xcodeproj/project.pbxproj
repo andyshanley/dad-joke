@@ -19,6 +19,7 @@
 		1000000000000000000000C9 /* PlaybackModeToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1000000000000000000000BA /* PlaybackModeToggle.swift */; };
 		1000000000000000000000CA /* JokeDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1000000000000000000000BB /* JokeDeckView.swift */; };
 		1000000000000000000000CB /* DotMatrixWaveform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1000000000000000000000BC /* DotMatrixWaveform.swift */; };
+		1000000000000000000000CD /* AudioPlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1000000000000000000000BD /* AudioPlaybackController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		1000000000000000000000BA /* PlaybackModeToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackModeToggle.swift; sourceTree = "<group>"; };
 		1000000000000000000000BB /* JokeDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeDeckView.swift; sourceTree = "<group>"; };
 		1000000000000000000000BC /* DotMatrixWaveform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotMatrixWaveform.swift; sourceTree = "<group>"; };
+		1000000000000000000000BD /* AudioPlaybackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlaybackController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				1000000000000000000000BA /* PlaybackModeToggle.swift */,
 				1000000000000000000000BB /* JokeDeckView.swift */,
 				1000000000000000000000BC /* DotMatrixWaveform.swift */,
+				1000000000000000000000BD /* AudioPlaybackController.swift */,
 				1000000000000000000000B3 /* Assets.xcassets */,
 				1000000000000000000000B7 /* Resources */,
 			);
@@ -189,6 +192,7 @@
 				1000000000000000000000C9 /* PlaybackModeToggle.swift in Sources */,
 				1000000000000000000000CA /* JokeDeckView.swift in Sources */,
 				1000000000000000000000CB /* DotMatrixWaveform.swift in Sources */,
+				1000000000000000000000CD /* AudioPlaybackController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
